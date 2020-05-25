@@ -1,0 +1,48 @@
+﻿<Properties StartupConfiguration="{08B98A4F-5E26-4AE1-92E7-77EE71DCEA43}|Default">
+  <MonoDevelop.Ide.ItemProperties.DellyShopApp.Android PreferredExecutionTarget="Android.pixel_3_pie_9_0_-_api_28" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="DellyShopApp/DellyShopApp/Languages/AppResources.ar.resx">
+    <Files>
+      <File FileName="DellyShopApp/DellyShopApp/ViewModel/BaseVM.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/ViewModel/BasketPageVM.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/Behaviors/ContextAssignedBehavior.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/Behaviors/ProtectedControlBehavior.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/Converters/BaseCardValidator.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/Converters/CardNumberToColorConverter.cs" Line="7" Column="67" />
+      <File FileName="DellyShopApp/DellyShopApp/CustomEventArgs/ItemAppearedEventArgs.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/App.xaml" Line="193" Column="37" />
+      <File FileName="DellyShopApp/DellyShopApp/Extensions/CardViewExtensions.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/Extensions/Epsilon.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/Helpers/FontAwesomeIcons.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/Helpers/PreserveAttribute.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/Helpers/Settings.cs" Line="1" Column="1" />
+      <File FileName="DellyShopApp/DellyShopApp/Languages/AppResources.ar.resx" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="DellyShopApp" expanded="True">
+            <Node name="DellyShopApp" expanded="True">
+              <Node name="CustomEventArgs" expanded="True" />
+              <Node name="Enums" expanded="True" />
+              <Node name="Extensions" expanded="True" />
+              <Node name="Helpers" expanded="True" />
+              <Node name="Languages" expanded="True">
+                <Node name="AppResources.ar.resx" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="ViewModel" expanded="True" />
+            </Node>
+            <Node name="DellyShopApp.iOS" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.DellyShopApp.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.3791F6C3-E6A8-407F-B270-2845C69B4EFA" />
+</Properties>

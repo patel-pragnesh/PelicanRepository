@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BasePage
+    x:Class="DellyShopApp.Views.Pages.CategoryDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+    xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base;assembly=DellyShopApp"
+    xmlns:controls="clr-namespace:DellyShopApp.Views.CustomView"
+    xmlns:customControl="clr-namespace:DellyShopApp.CustomControl;assembly=DellyShopApp"
+    xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:languages="clr-namespace:DellyShopApp.Languages;assembly=DellyShopApp"
+    xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
+    xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    BackgroundColor="{DynamicResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material">
+    <ScrollView Margin="15,10,15,0">
+        <StackLayout>
+            <!--  DellyShop Title And Description  -->
+            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                <StackLayout Spacing="0">
+                    <Label
+                        Margin="0"
+                        Padding="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontFamily="{DynamicResource VerdanaProRegular}"
+                        FontSize="30"
+                        HorizontalOptions="Start"
+                        Style="{DynamicResource LabelStyle}"
+                        Text="{languages:Translate Shop}"
+                        TextColor="{DynamicResource DarkLabelTextColor}" />
+                    <Label
+                        Margin="0"
+                        Padding="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontFamily="{DynamicResource VerdanaProBold}"
+                        FontSize="8"
+                        HorizontalOptions="Start"
+                        Text="{languages:Translate TitleDesc}"
+                        TextColor="{DynamicResource DescLabelColor}" />
+
+                </StackLayout>
+            </StackLayout>
+            <!--  SearchBar  -->
+            <Frame
+                Margin="0,20,0,10"
+                CornerRadius="17"
+                HasShadow="False"
+                HeightRequest="35"
+                Style="{DynamicResource FrameStyle}">
+                <renderers:BorderlessSearchBar
+                    BackgroundColor="Transparent"
+                    CancelButtonColor="{DynamicResource MainColor}"
+                    FontFamily="{DynamicResource VerdanaProRegular}"
+                    TextColor="{DynamicResource DarkFontColor}" />
+            </Frame>
+            <!--  Category Name and Image  -->
+            <StackLayout Margin="0,5,0,0" HorizontalOptions="FillAndExpand">
+                <Grid BackgroundColor="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        sharedTransitions:Transition.Name="DogImage"
+                        Aspect="AspectFill"
+                        Source="{Binding Image}" />
+                    <pancakeView:PancakeView
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        BackgroundGradientEndColor="{DynamicResource DarkFontColor}"
+                        BackgroundGradientStartColor="Transparent"
+                        CornerRadius="10"
+                        HorizontalOptions="FillAndExpand" />
+                    <StackLayout Orientation="Horizontal">
+                        <Image
+                            Aspect="AspectFit"
+                            HeightRequest="50"
+                            HorizontalOptions="Start"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="50">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="BackPage" />
+                            </Image.GestureRecognizers>
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="{DynamicResource MaterialFontFamily}"
+                                    Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
+                                    Size="30"
+                                    Color="{DynamicResource FontColor}" />
+                            </Image.Source>
+                        </Image>
+                        <Label
+                            Margin="-50,0,0,0"
+                            Padding="0,5,0,0"
+                            FontAttributes="Bold"
+                            FontFamily="{DynamicResource VerdanaProBold}"
+                            FontSize="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="{Binding CategoryName}"
+                            TextColor="{DynamicResource FontColor}"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+
+                </Grid>
+            </StackLayout>
+            <!--  Carousel View  -->
+            <pancakeView:PancakeView
+                Margin="0,10,0,0"
+                Padding="0"
+                CornerRadius="8"
+                Elevation="2"
+                HasShadow="False">
+                <abstractions:CarouselViewControl
+                    x:Name="CarouselView"
+                    Margin="0,0,0,0"
+                    BackgroundColor="{DynamicResource MainColor}"
+                    CurrentPageIndicatorTintColor="White"
+                    HeightRequest="{x:OnIdiom Tablet=350,
+                                              Phone=200}"
+                    IndicatorsTintColor="{DynamicResource MainColor}"
+                    InterPageSpacing="1"
+                    IsSwipeEnabled="True"
+                    Position="0"
+                    ShowArrows="False"
+                    ShowIndicators="True"
+                    WidthRequest="300">
+                    <abstractions:CarouselViewControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <forms:CachedImage
+                                    Margin="0"
+                                    Aspect="AspectFill"
+                                    CacheType="Memory"
+                                    DownsampleToViewSize="True"
+                                    FadeAnimationDuration="100"
+                                    FadeAnimationEnabled="True"
+                                    Source="{Binding Image}" />
+                            </ContentView>
+                        </DataTemplate>
+                    </abstractions:CarouselViewControl.ItemTemplate>
+                </abstractions:CarouselViewControl>
+            </pancakeView:PancakeView>
+            <Label
+                Margin="0,10,0,0"
+                Padding="5,5,0,0"
+                FontAttributes="Bold"
+                FontFamily="{DynamicResource VerdanaProBold}"
+                FontSize="22"
+                HorizontalOptions="Start"
+                Text="{languages:Translate BestSeller}"
+                TextColor="{DynamicResource DarkFontColor}"
+                VerticalOptions="Start" />
+            <!--  ProcutctList  -->
+            <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                <customControl:RepeaterView
+                    x:Name="BestSellerList"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <customControl:RepeaterView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <pancakeView:PancakeView
+                                    Margin="5"
+                                    Padding="5"
+                                    BackgroundColor="{DynamicResource ItemColor}"
+                                    CornerRadius="8"
+                                    Elevation="2"
+                                    HasShadow="False"
+                                    HeightRequest="250"
+                                    HorizontalOptions="StartAndExpand"
+                                    VerticalOptions="StartAndExpand"
+                                    WidthRequest="{x:OnIdiom Tablet=150,
+                                                             Phone=130}">
+                                    <pancakeView:PancakeView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ProductDetailClick" />
+                                    </pancakeView:PancakeView.GestureRecognizers>
+                                    <StackLayout>
+                                        <forms:CachedImage
+                                            Aspect="AspectFill"
+                                            HeightRequest="150"
+                                            Source="{Binding Image}" />
+                                        <Label
+                                            FontFamily="{DynamicResource VerdanaProRegular}"
+                                            Text="{Binding Title}"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
+                                            VerticalOptions="Start" />
+                                        <Label
+                                            FontFamily="{DynamicResource VerdanaProRegular}"
+                                            FontSize="10"
+                                            HorizontalOptions="Start"
+                                            Text="{Binding Brand}"
+                                            TextColor="{DynamicResource DescLabelColor}"
+                                            VerticalOptions="Start" />
+                                        <Label
+                                            FontFamily="{DynamicResource VerdanaProBold}"
+                                            FontSize="25"
+                                            HorizontalOptions="EndAndExpand"
+                                            Text="{Binding Price, StringFormat='Rs:{0}'}"
+                                            TextColor="{DynamicResource DarkLabelTextColor}"
+                                            VerticalOptions="EndAndExpand" />
+                                    </StackLayout>
+                                </pancakeView:PancakeView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </customControl:RepeaterView.ItemTemplate>
+                </customControl:RepeaterView>
+            </ScrollView>
+            <Label
+                Margin="0,10,0,0"
+                Padding="5,5,0,0"
+                FontAttributes="Bold"
+                FontFamily="{DynamicResource VerdanaProBold}"
+                FontSize="22"
+                HorizontalOptions="Start"
+                Text="{languages:Translate PreviousViewed}"
+                TextColor="{DynamicResource DarkFontColor}"
+                VerticalOptions="Start" />
+            <!--  ProcutctList  -->
+            <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                <customControl:RepeaterView
+                    x:Name="PreviousViewedList"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <customControl:RepeaterView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <pancakeView:PancakeView
+                                    Margin="5"
+                                    Padding="5"
+                                    BackgroundColor="{DynamicResource ItemColor}"
+                                    CornerRadius="8"
+                                    Elevation="2"
+                                    HasShadow="False"
+                                    HeightRequest="250"
+                                    HorizontalOptions="StartAndExpand"
+                                    VerticalOptions="StartAndExpand"
+                                    WidthRequest="{x:OnIdiom Tablet=150,
+                                                             Phone=130}">
+                                    <pancakeView:PancakeView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ProductDetailClick" />
+                                    </pancakeView:PancakeView.GestureRecognizers>
+                                    <StackLayout>
+                                        <forms:CachedImage
+                                            Aspect="AspectFill"
+                                            HeightRequest="150"
+                                            Source="{Binding Image}" />
+                                        <Label
+                                            FontFamily="{DynamicResource VerdanaProRegular}"
+                                            Text="{Binding Title}"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
+                                            VerticalOptions="Start" />
+                                        <Label
+                                            FontFamily="{DynamicResource VerdanaProRegular}"
+                                            FontSize="10"
+                                            HorizontalOptions="Start"
+                                            Text="{Binding Brand}"
+                                            TextColor="{DynamicResource DescLabelColor}"
+                                            VerticalOptions="Start" />
+
+                                        <Label
+                                            FontFamily="{DynamicResource VerdanaProBold}"
+                                            FontSize="25"
+                                            HorizontalOptions="EndAndExpand"
+                                            Text="{Binding Price, StringFormat='Rs:{0}'}"
+                                            TextColor="{DynamicResource DarkLabelTextColor}"
+                                            VerticalOptions="EndAndExpand" />
+                                    </StackLayout>
+                                </pancakeView:PancakeView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </customControl:RepeaterView.ItemTemplate>
+                </customControl:RepeaterView>
+            </ScrollView>
+            <Label
+                Margin="0,10,0,0"
+                Padding="5,5,0,0"
+                FontAttributes="Bold"
+                FontFamily="{DynamicResource VerdanaProBold}"
+                FontSize="22"
+                HorizontalOptions="Start"
+                Text="{languages:Translate PreviousViewed}"
+                TextColor="{DynamicResource DarkFontColor}"
+                VerticalOptions="Start" />
+            <!--  ProcutctList  -->
+            <controls:FlowListView
+                x:Name="MostNews"
+                BackgroundColor="{DynamicResource BackgroundColor}"
+                FlowColumnCount="2"
+                FlowColumnExpand="None"
+                HasUnevenRows="False"
+                RowHeight="280"
+                SeparatorVisibility="None"
+                VerticalOptions="StartAndExpand"
+                VerticalScrollBarVisibility="Never">
+                <controls:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <pancakeView:PancakeView
+                            Margin="5"
+                            Padding="5"
+                            BackgroundColor="{DynamicResource ItemColor}"
+                            CornerRadius="8"
+                            Elevation="2"
+                            HasShadow="False"
+                            HeightRequest="250"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="StartAndExpand"
+                            WidthRequest="{x:OnIdiom Tablet=150,
+                                                     Phone=130}">
+                            <StackLayout>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ClickCategory" />
+                                </StackLayout.GestureRecognizers>
+                                <forms:CachedImage
+                                    Aspect="AspectFit"
+                                    HeightRequest="150"
+                                    Source="{Binding Image}" />
+                                <Label
+                                    FontFamily="{DynamicResource VerdanaProRegular}"
+                                    Text="{Binding Title}"
+                                    TextColor="{DynamicResource WhiteDarkFontColor}"
+                                    VerticalOptions="Start" />
+                                <Label
+                                    FontFamily="{DynamicResource VerdanaProRegular}"
+                                    FontSize="10"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding Brand}"
+                                    TextColor="{DynamicResource DescLabelColor}"
+                                    VerticalOptions="Start" />
+
+                                <Label
+                                    FontFamily="{DynamicResource VerdanaProBold}"
+                                    FontSize="25"
+                                    HorizontalOptions="EndAndExpand"
+                                    Text="{Binding Price, StringFormat='Rs:{0}'}"
+                                    TextColor="{DynamicResource DarkLabelTextColor}"
+                                    VerticalOptions="EndAndExpand" />
+                            </StackLayout>
+                        </pancakeView:PancakeView>
+                    </DataTemplate>
+                </controls:FlowListView.FlowColumnTemplate>
+            </controls:FlowListView>
+        </StackLayout>
+    </ScrollView>
+</base:BasePage>
