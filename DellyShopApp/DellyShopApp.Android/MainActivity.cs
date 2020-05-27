@@ -1,4 +1,5 @@
 ﻿using System;
+using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.Content.Res;
@@ -23,6 +24,7 @@ namespace DellyShopApp.Droid
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             base.OnCreate(savedInstanceState);
+            UserDialogs.Init(this);
             ///For Performance 
             Forms.SetFlags("FastRenderers_Experimental");
 

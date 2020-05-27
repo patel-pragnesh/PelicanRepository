@@ -45,18 +45,18 @@
                 <Image
                     Aspect="AspectFit"
                     HeightRequest="50"
-                    Source="{Binding Image}"
+                    Source="{Binding Product.Image}"
                     WidthRequest="50" />
                 <StackLayout VerticalOptions="CenterAndExpand">
                     <Label
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="15"
-                        Text="{Binding Title}"
+                        Text="{Binding Product.Title}"
                         TextColor="{DynamicResource WhiteDarkFontColor}" />
                     <Label
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="12"
-                        Text="{Binding Brand}"
+                        Text="{Binding Product.Brand}"
                         TextColor="{DynamicResource DescLabelColor}" />
                 </StackLayout>
                 <Label
@@ -65,7 +65,7 @@
                     FontFamily="{DynamicResource VerdanaProRegular}"
                     FontSize="22"
                     HorizontalOptions="EndAndExpand"
-                    Text="{Binding Price, StringFormat='Rs:{0}'}"
+                    Text="{Binding Product.Price, StringFormat='Rs:{0}'}"
                     TextColor="{DynamicResource PriceLabelColor}"
                     VerticalOptions="CenterAndExpand" />
             </StackLayout>

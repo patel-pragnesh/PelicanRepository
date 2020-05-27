@@ -5,9 +5,9 @@ using DellyShopApp.Models;
 
 namespace DellyShopApp.DAL.DAO
 {
-    interface IProductDAO
+    public interface IBasketDAO
     {
-        Task<List<Product>> GetAllProducts();
-        Task<bool> SaveProducts(List<Product> products);
+        Task<bool> AddBasketItem(BasketItem item);
+        Task<List<BasketItem>> GetAllBasketItems();
     }
 }

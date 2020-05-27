@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DellyShopApp.DAL.Entity;
 using DellyShopApp.Persistance;
@@ -13,15 +14,30 @@ namespace DellyShopApp.DAL
             Handler = new DBHandler(db);
         }
 
-        public async Task ClearProduct()
+        #region Product
+        public async Task ClearAllProduct()
         {
             await Handler.ClearProducts();
         }
 
-        public async Task SyncProductAsync(ENTProduct product)
+        public async Task SyncProductAsync(List<ENTProduct> products)
         {
             await Handler.ClearProducts();
-            await Handler.SaveProduct(product);
+            await Handler.SaveProducts(products);
         }
+        #endregion
+
+        #region Basket
+        public async Task ClearAllBasketItems()
+        {
+            await Handler.ClearBasket();
+        }
+
+        public async Task SyncBasketItems(List<ENTBasketItem> basketItems)
+        {
+            await Handler.ClearProducts();
+            //await Handler.SaveProducts(products);
+        }
+        #endregion
     }
 }

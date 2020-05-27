@@ -1,5 +1,6 @@
 ﻿using DellyShopApp.Languages;
 using DellyShopApp.Models;
+using DellyShopApp.ViewModel;
 using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
 using System;
@@ -13,6 +14,7 @@ namespace DellyShopApp.Views.TabbedPages
     {
         public HomePage()
         {
+            this.BindingContext = new HomeViewModel();
             ProcutListModel.Insert(0, new ProductListModel
             {
                 Title = TranslateExtension.Translate("ProcutTitle3"),
@@ -29,7 +31,7 @@ namespace DellyShopApp.Views.TabbedPages
             CategoryList.ItemsSource = CatoCategoriesList;
             CarouselView.ItemsSource = Carousel;
             BestSellerList.ItemsSource = ProcutListModel;
-            PreviousViewedList.ItemsSource = ProcutListModel;
+            //PreviousViewedList.ItemsSource = ProcutListModel;
             MostNews.FlowItemsSource = ProcutListModel;
         }
 

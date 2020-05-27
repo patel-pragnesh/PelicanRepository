@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DellyShopApp.DAL.Entity;
 using DellyShopApp.Persistance;
@@ -12,7 +13,8 @@ namespace DellyShopApp.DAL
         public DBHandler(ISQLLiteDb db)
         {
             _connection = db.GetConnection();
-            _connection.CreateTableAsync<ENTProduct>().Wait();
+            //_connection.CreateTableAsync<ENTProduct>().Wait();
+            _connection.CreateTableAsync<ENTBasketItem>().Wait();
         }
 
         #region Product
@@ -28,11 +30,11 @@ namespace DellyShopApp.DAL
             }
         }
 
-        public async Task SaveProduct(ENTProduct product)
+        public async Task SaveProducts(List<ENTProduct> products)
         {
             try
             {
-                await _connection.InsertOrReplaceAsync(product);
+                await _connection.InsertAllAsync(products);
             }
             catch(Exception e)
             {
@@ -40,13 +42,51 @@ namespace DellyShopApp.DAL
             }
         }
 
-        public async Task<ENTProduct> GetProduct()
+        public async Task<List<ENTProduct>> GetProducts()
         {
             try
             {
-                return await _connection.Table<ENTProduct>().FirstOrDefaultAsync();
+                return await _connection.Table<ENTProduct>().ToListAsync();
             }
             catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        #endregion
+
+        #region Basket
+        public async Task ClearBasket()
+        {
+            try
+            {
+                await _connection.DeleteAllAsync<ENTBasketItem>();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task AddProductToBasket(ENTBasketItem basketItem)
+        {
+            try
+            {
+                await _connection.InsertAsync(basketItem);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<ENTBasketItem>> GetAllBasketItems()
+        {
+            try
+            {
+                return await _connection.Table<ENTBasketItem>().ToListAsync();
+            }
+            catch (Exception e)
             {
                 throw e;
             }

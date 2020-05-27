@@ -234,6 +234,7 @@
             <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
                 <customControl:RepeaterView
                     x:Name="PreviousViewedList"
+                    ItemsSource="{Binding Products}"
                     Orientation="Horizontal"
                     Spacing="10">
                     <customControl:RepeaterView.ItemTemplate>

@@ -4,6 +4,7 @@ using System.Linq;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
+using DellyShopApp.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -55,12 +56,25 @@ namespace DellyShopApp.Views.Pages
                 Rates = _startList.Skip(0).ToList()
             });
             InitializeComponent();
-            this.BindingContext = product;
+            //this.BindingContext = product;
             starList.ItemsSource = _startList;
             starListglobal.ItemsSource = _startList;
 
             CommentList.ItemsSource = _comments;
-            //MainScroll.Scrolled += MainScroll_Scrolled; 
+            //MainScroll.Scrolled += MainScroll_Scrolled;
+
+            this.BindingContext = new ProductDetailsViewModel(product,Navigation);
+
+
+        }
+
+        ProductDetailsViewModel ViewModel
+        {
+            get
+            {
+                return (ProductDetailsViewModel)BindingContext;
+            }
+
         }
         private void PlusClick(object sender, EventArgs e)
         {
@@ -91,8 +105,9 @@ namespace DellyShopApp.Views.Pages
         }
 
         void AddBasketButton(object sender, EventArgs e)
-            {
+        {
             DisplayAlert(TranslateExtension.Translate("Success"), _products.Title+" "+TranslateExtension.Translate("AddedBakset"),TranslateExtension.Translate("Okay"));
+            ViewModel.AddToBasket(productCount);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DellyShopApp.DAL.Entity;
 using DellyShopApp.Models;
@@ -21,21 +22,54 @@ namespace DellyShopApp.DAL.DAO
 
 
         #region Get Product
-        private Task<ENTProduct> GetProductFromRemote()
+        private Task<List<ENTProduct>> GetProductsFromRemote()
         {
-            return dBHandler.GetProduct();
+            return dBHandler.GetProducts();
         }
-        public async Task<Product> GetProduct()
+        public async Task<List<Product>> GetAllProducts()
         {
             try
             {
-                ENTProduct remoteProduct = await GetProductFromRemote();
-                if(remoteProduct != null)
+                List<ENTProduct> remoteProducts = await GetProductsFromRemote();
+                List<Product> domList = new List<Product>();
+                List<ProductImages> domImageList = new List<ProductImages>();
+
+                if(remoteProducts != null && remoteProducts.Count>0)
                 {
-                    return new Product()
+                    foreach(ENTProduct p in remoteProducts)
                     {
-                        //set attr
-                    };
+                        if(p.ProductImages != null && p.ProductImages.Count>0)
+                        {
+                            foreach(ENTImages img in p.ProductImages)
+                            {
+                                domImageList.Add(new ProductImages()
+                                {
+                                    ImagePath = img.ImagePath
+                                });
+                            }
+            
+                        }
+                        domList.Add(new Product()
+                        {
+                            UOM = p.UOM,
+                            SerialNumber = p.SerialNumber,
+                            BarCode = p.BarCode,
+                            CreatedAt = p.CreatedAt,
+                            Description = p.Description,
+                            DiscountPercent = p.DiscountPercent,
+                            Id = p.Id,
+                            MRP = p.MRP,
+                            ProductCode = p.ProductCode,
+                            ProductId = p.ProductId,
+                            ProductImages = domImageList,
+                            ProductName = p.ProductName,
+                            ProductType = p.ProductType
+                        });
+                    }
+
+                    if (domList.Count > 0)
+                        return domList;
+             
                 }
                 return null;
             }
@@ -47,21 +81,21 @@ namespace DellyShopApp.DAL.DAO
 
         #endregion
 
-        #region Update Product
-        public async Task<Product> UpdateProduct(Product product)
+        #region Save All Products
+        public async Task<bool> SaveProducts(List<Product> products)
         {
             try
             {
-                if(product != null)
+                if(products != null)
                 {
-                    await synchronizer.SyncProductAsync(new ENTProduct()
+                    await synchronizer.SyncProductAsync(new List<ENTProduct>()
                     {
                         // set attr
 
                     });
-                    return product;
+                    return true;
                 }
-                return null;
+                return false;
             }
             catch(Exception e)
             {
