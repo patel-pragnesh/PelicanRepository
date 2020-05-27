@@ -1,4 +1,6 @@
 ﻿using DellyShopApp.Helpers;
+using DellyShopApp.Managers.Configuration;
+using DellyShopApp.Network;
 using DellyShopApp.Views.CustomView;
 using Plugin.SharedTransitions;
 using Xamarin.Forms;
@@ -13,8 +15,14 @@ namespace DellyShopApp
         {
             InitializeComponent();
             FlowListView.Init();
+            InitDsApiClient();
             MainPage = new SharedTransitionNavigationPage(new MainPage());
             App.Current.MainPage.FlowDirection = Settings.SelectLanguage == "ar" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+        }
+
+        private void InitDsApiClient()
+        {
+            DsApi.Init(ConfigurationManager.BaseUrl);
         }
     }
 }
