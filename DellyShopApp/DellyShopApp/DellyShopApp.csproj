@@ -19,6 +19,9 @@
     <PackageReference Include="XamarinFastEntry.Behaviors" Version="1.1.1" />
     <PackageReference Include="Plugin.Multilingual" Version="1.0.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.991221" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="sqlite" Version="3.13.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
   </ItemGroup>
 
   <ItemGroup>
@@ -133,6 +136,10 @@
     <Folder Include="Views\FlowCells\" />
     <Folder Include="CustomControl\FlowSelectors\" />
     <Folder Include="CustomControl\FlowListViewControl\" />
+    <Folder Include="DAL\" />
+    <Folder Include="DAL\Entity\" />
+    <Folder Include="Persistance\" />
+    <Folder Include="DAL\DAO\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Languages\AppResources.ar.Designer.cs">
