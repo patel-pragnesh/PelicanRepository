@@ -18,6 +18,21 @@ namespace DellyShopApp.Models
         public int UOM { get; set; }
         public DateTime CreatedAt { get; set; }
         public IList<ProductImages> ProductImages { get; set; }
+
+        public string DefaultImage
+        {
+            get
+            {
+                return ProductImages.Count > 0 ? ProductImages[0].ImagePath : "";
+            }
+        }
+        public string Price
+        {
+            get
+            {
+                return MRP.ToString();
+            }
+        }
     }
 
     public class ProductImages

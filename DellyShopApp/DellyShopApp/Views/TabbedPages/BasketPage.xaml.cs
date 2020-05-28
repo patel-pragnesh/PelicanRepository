@@ -1,4 +1,6 @@
-﻿using DellyShopApp.Models;
+﻿using Acr.UserDialogs;
+using DellyShopApp.DAL.DAO;
+using DellyShopApp.Models;
 using DellyShopApp.ViewModel;
 using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.ModalPages;
@@ -19,17 +21,25 @@ namespace DellyShopApp.Views.TabbedPages
         public BasketPage()
         {
             InitializeComponent();
-
+            BindingContext = new BasketViewModel();
 
         }
-
+        BasketViewModel ViewModel
+        {
+            get
+            {
+                return (BasketViewModel)(BindingContext);
+            }
+        }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            TotalPrice.Text = $"RS:{BaseTotalPrice + 12}";
+            ViewModel.LoadData();
+            //TotalPrice.Text = $"RS:{BaseTotalPrice + 12}";
             _basketVm.ProcutListModel = ProcutListModel;
-            BasketItems.ItemsSource = _basketVm.ProcutListModel;
+            //BasketItems.ItemsSource = _basketVm.ProcutListModel;
         }
+
 
         /// <summary>
         /// Go to Address Page

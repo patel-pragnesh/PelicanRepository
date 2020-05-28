@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Acr.UserDialogs;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
@@ -104,10 +105,25 @@ namespace DellyShopApp.Views.Pages
             await Navigation.PushAsync(new CommentsPage(_products));
         }
 
-        void AddBasketButton(object sender, EventArgs e)
+        async void AddBasketButton(object sender, EventArgs e)
         {
-            DisplayAlert(TranslateExtension.Translate("Success"), _products.Title+" "+TranslateExtension.Translate("AddedBakset"),TranslateExtension.Translate("Okay"));
-            ViewModel.AddToBasket(productCount);
+            var result = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+            {
+                Message = "Add this to basket?",
+                OkText = "Add",
+                CancelText = "Cancel"
+            });
+            if (result)
+            {
+                if (productCount == 0)
+                {
+                    productCount = 1;
+                }
+                    
+                ViewModel.AddToBasket(productCount);
+            }
+                //DisplayAlert(TranslateExtension.Translate("Success"), _products.Title+" "+TranslateExtension.Translate("AddedBakset"),TranslateExtension.Translate("Okay"));
+               
         }
     }
 }
