@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DellyShopApp.Models;
+using DellyShopApp.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace DellyShopApp.Views.Pages
     public partial class SelectCreditCardPage
     {
         private readonly List<CrediCardModel> _crediCard = new List<CrediCardModel>();
-        public SelectCreditCardPage()
+        public SelectCreditCardPage(Order order)
         {
             _crediCard.Add(new CrediCardModel
             {
@@ -34,7 +35,16 @@ namespace DellyShopApp.Views.Pages
                 CardColor = "#68C277"
             });
             InitializeComponent();
+            BindingContext = new SelectCreditCardViewModel(Navigation,order);
             CarouselView.ItemsSource = _crediCard;
+        }
+
+        SelectCreditCardViewModel ViewModel
+        {
+            get
+            {
+                return (SelectCreditCardViewModel)BindingContext;
+            }
         }
 
         private void AddCardClick(object sender, EventArgs e)
@@ -49,7 +59,7 @@ namespace DellyShopApp.Views.Pages
 
         private async void ContinueOrderButton(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SuccessPage());
+            ViewModel.CreateOrder();
         }
     }
 }

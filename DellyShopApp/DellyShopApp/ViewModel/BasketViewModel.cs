@@ -50,6 +50,42 @@ namespace DellyShopApp.ViewModel
             //LoadData();
         }
 
+        public Order GetOrderList()
+        {
+            var order = new Order();
+            var itemList = new List<Item>();
+            if (ProductsInBasket != null && ProductsInBasket.Count>0 && _basketList != null && _basketList.Count>0)
+            {
+                foreach (BasketItem item in _basketList)
+                {
+                    var relevantProduct = ProductsInBasket.Where(p => p.ProductId == item.ProductId).FirstOrDefault();
+                    if (relevantProduct != null)
+                    {
+                        itemList.Add(new Item()
+                        {
+                            Price = relevantProduct.MRP,
+                            DiscountAmount = 0,
+                            ProductId = relevantProduct.ProductId,
+                            Qty = item.Quantity
+                        });
+                    }
+                }
+                order.BranchId = "";
+                order.CustomerId = "";
+                order.DeliveryAddress = "Galle";
+                order.Description = "Testing Visal";
+                order.Items = itemList;
+                order.PicCustomer = "";
+                order.PicInternal = "";
+                order.ReferenceNumberExternal = "";
+                order.ReferenceNumberInternal = "";
+
+                return order;
+            }
+            return null;
+
+        }
+
         private async Task LoadBasketItems()
         {
             

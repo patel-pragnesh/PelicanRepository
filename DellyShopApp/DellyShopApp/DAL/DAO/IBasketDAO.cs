@@ -9,5 +9,6 @@ namespace DellyShopApp.DAL.DAO
     {
         Task<bool> AddBasketItem(BasketItem item);
         Task<List<BasketItem>> GetAllBasketItems();
+        Task<bool> CreateOrder(Order orders);
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using DellyShopApp.DAL.Entity;
 using DellyShopApp.Models;
+using DellyShopApp.Network;
+using DellyShopApp.Network.Proxy.Models;
 using DellyShopApp.Persistance;
 using Xamarin.Forms;
 
@@ -13,6 +16,8 @@ namespace DellyShopApp.DAL.DAO
         Synchronizer synchronizer;
         ISQLLiteDb db;
         DBHandler dBHandler;
+    
+
         public BasketDAO()
         {
             db = DependencyService.Get<ISQLLiteDb>();
@@ -73,6 +78,60 @@ namespace DellyShopApp.DAL.DAO
                 throw e;
             }
     
+        }
+
+        public async Task<bool> CreateOrder(Order orders)
+        {
+            //var config = new MapperConfiguration(cfg => cfg.CreateMap<PRXRequestOrder, Order>());
+            //var mapper = new Mapper(config);
+            //PRXRequestOrder request = mapper.Map<PRXRequestOrder>(orders);
+            PRXRequestOrder request = null;
+            try
+            {
+                List<PRXItem> ps = new List<PRXItem>();
+
+                if (orders != null && orders.Items != null && orders.Items.Count > 0)
+                {
+                    foreach(Item it in orders.Items)
+                    {
+                        ps.Add(new PRXItem()
+                        {
+                            DiscountAmount = it.DiscountAmount,
+                            Price = it.Price,
+                            ProductId = it.ProductId,
+                            Qty = it.Qty,
+                            TotalAmount = it.TotalAmount
+                        });
+                    }
+                    request = new PRXRequestOrder()
+                    {
+                        BranchId = orders.BranchId,
+                        CustomerId = orders.CustomerId,
+                        DeliveryAddress = orders.DeliveryAddress,
+                        Description = orders.Description,
+                        Items = ps,
+                        PicCustomer = orders.PicCustomer,
+                        PicInternal = orders.PicInternal,
+                        ReferenceNumberExternal = orders.ReferenceNumberExternal,
+                        ReferenceNumberInternal = orders.ReferenceNumberInternal,
+                        Top = orders.Top
+                    };
+               
+                }
+
+                if(request != null)
+                {
+                    return await DsApi.GetInstance().CreateOrderAsync(request);
+                }
+                return false;
+
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+
+            
         }
     }
 }

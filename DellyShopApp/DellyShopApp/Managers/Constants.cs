@@ -12,6 +12,7 @@ namespace DellyShopApp.Managers
         public class DsApiEndPoints
         {
             public const string OAuthTokenUrl = "api/oauth/token";
+            public const string CreateOrderUrl = "api/order/create";
             public const string ProductsUrl = "api/products";
         }
 

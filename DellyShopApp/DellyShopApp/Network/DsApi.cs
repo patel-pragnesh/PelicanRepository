@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using DellyShopApp.Managers;
 using DellyShopApp.Network.Proxy.Models;
+using Newtonsoft.Json;
 
 namespace DellyShopApp.Network
 {
@@ -34,6 +38,23 @@ namespace DellyShopApp.Network
             return _instance;
         }
 
+
+        private NameValueCollection GetParams(string jsonString)
+        {
+            Dictionary<string, object> dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
+
+            NameValueCollection nvc = null;
+            if (dict != null)
+            {
+                nvc = new NameValueCollection(dict.Count);
+                foreach (var k in dict)
+                {
+                    nvc.Add(k.Key, k.Value.ToString());
+                }
+            }
+            return nvc;
+        }
+
         public async Task<List<PRXResponseProduct>> RetrieveProductInfoAsync()
         {
             List<PRXResponseProduct> domList = new List<PRXResponseProduct>();
@@ -63,5 +84,23 @@ namespace DellyShopApp.Network
 
             return domList;
         }
+
+        public async Task<bool>CreateOrderAsync(PRXRequestOrder request)
+        {
+            try
+            {
+                HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                var result = await _dsHttpClient.PostAsync<PRXRequestOrder>(Constants.DsApiEndPoints.CreateOrderUrl,null,httpContent);
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                return false;
+            }
+
+
+        }
+
     }
 }

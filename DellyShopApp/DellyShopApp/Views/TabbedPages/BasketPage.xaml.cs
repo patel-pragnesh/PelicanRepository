@@ -53,7 +53,8 @@ namespace DellyShopApp.Views.TabbedPages
 
         private async void ContinueClick(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SelectCreditCardPage(), true);
+            var currentOrder = ViewModel.GetOrderList();
+            await Navigation.PushAsync(new SelectCreditCardPage(currentOrder), true);
         }
         /// <summary>
         /// Delete Visible Settings
