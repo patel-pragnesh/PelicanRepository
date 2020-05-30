@@ -119,12 +119,12 @@
                                             Color="{DynamicResource IconBgColor}" />
                                     </Image.Source>
                                 </Image>
-                                <renderers:BorderlessEntry MaxLength="15" Style="{DynamicResource BorderlessEntry}" />
+                                <renderers:BorderlessEntry Text="{Binding FirstName, Mode=TwoWay}" MaxLength="15" Style="{DynamicResource BorderlessEntry}" />
                             </StackLayout>
 
                         </Frame>
                         <Frame Style="{DynamicResource FrameStyle}">
-                            <renderers:BorderlessEntry MaxLength="15" Style="{DynamicResource BorderlessEntry}" />
+                            <renderers:BorderlessEntry Text="{Binding LastName, Mode=TwoWay}"  MaxLength="15" Style="{DynamicResource BorderlessEntry}" />
                         </Frame>
                     </StackLayout>
 
@@ -144,7 +144,7 @@
                                         Color="{DynamicResource IconBgColor}" />
                                 </Image.Source>
                             </Image>
-                            <renderers:BorderlessEntry Keyboard="Email" Style="{DynamicResource BorderlessEntry}" />
+                            <renderers:BorderlessEntry Text="{Binding Email, Mode=TwoWay}"  Keyboard="Email" Style="{DynamicResource BorderlessEntry}" />
                         </StackLayout>
                     </Frame>
                     <Label
@@ -163,7 +163,7 @@
                                         Color="{DynamicResource IconBgColor}" />
                                 </Image.Source>
                             </Image>
-                            <renderers:BorderlessEntry Keyboard="Numeric" Style="{DynamicResource BorderlessEntry}" />
+                            <renderers:BorderlessEntry Text="{Binding PhoneNumber, Mode=TwoWay}"  Keyboard="Numeric" Style="{DynamicResource BorderlessEntry}" />
                         </StackLayout>
                     </Frame>
                     <Label
@@ -182,7 +182,7 @@
                                         Color="{DynamicResource IconBgColor}" />
                                 </Image.Source>
                             </Image>
-                            <renderers:BorderlessEntry IsPassword="True" Style="{DynamicResource BorderlessEntry}" />
+                            <renderers:BorderlessEntry Text="{Binding Password, Mode=TwoWay}"  IsPassword="True" Style="{DynamicResource BorderlessEntry}" />
                         </StackLayout>
 
                     </Frame>
@@ -202,7 +202,7 @@
                                         Color="{DynamicResource IconBgColor}" />
                                 </Image.Source>
                             </Image>
-                            <renderers:BorderlessEntry IsPassword="True" Style="{DynamicResource BorderlessEntry}" />
+                            <renderers:BorderlessEntry Text="{Binding ConfirmPassword, Mode=TwoWay}"  IsPassword="True" Style="{DynamicResource BorderlessEntry}" />
                         </StackLayout>
                     </Frame>
                     <Label
@@ -235,7 +235,7 @@
                         Style="{StaticResource LabelStyle}"
                         Text="{helpers:Translate Address}" />
                     <Frame HeightRequest="100" Style="{DynamicResource FrameStyle}">
-                        <renderers:BorderlessEditor BackgroundColor="Transparent" TextColor="{DynamicResource DarkFontColor}" />
+                        <renderers:BorderlessEditor Text="{Binding Address, Mode=TwoWay}"  BackgroundColor="Transparent" TextColor="{DynamicResource DarkFontColor}" />
                     </Frame>
                     <Button
                         Margin="{x:OnIdiom Tablet='150,20,150,10',

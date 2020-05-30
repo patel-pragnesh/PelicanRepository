@@ -14,6 +14,7 @@ namespace DellyShopApp.Managers
             public const string OAuthTokenUrl = "api/oauth/token";
             public const string CreateOrderUrl = "api/order/create";
             public const string ProductsUrl = "api/products";
+            public const string RegisterCustomerUrl = "api/customer/registration";
         }
 
 
