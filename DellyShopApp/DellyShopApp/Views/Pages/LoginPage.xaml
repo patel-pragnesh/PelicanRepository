@@ -126,6 +126,7 @@
                             <renderers:BorderlessEntry
                                 HorizontalOptions="FillAndExpand"
                                 Keyboard="Email"
+                                Text="{Binding Email, Mode=TwoWay}"
                                 TextColor="{DynamicResource EntryTextColor}" />
                         </StackLayout>
                     </Frame>
@@ -154,6 +155,7 @@
                             </Image>
                             <renderers:BorderlessEntry
                                 HorizontalOptions="FillAndExpand"
+                                Text="{Binding Password, Mode=TwoWay}"
                                 IsPassword="True"
                                 TextColor="{DynamicResource EntryTextColor}" />
                         </StackLayout>

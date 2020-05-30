@@ -1,5 +1,6 @@
 ﻿using System;
 using DellyShopApp.Languages;
+using DellyShopApp.ViewModel;
 using Xamarin.Forms.Xaml;
 
 namespace DellyShopApp.Views.Pages
@@ -10,11 +11,20 @@ namespace DellyShopApp.Views.Pages
         public LoginPage()
         {
             InitializeComponent();
+            BindingContext = new LoginViewModel(Navigation);
+        }
+
+        LoginViewModel ViewModel
+        {
+            get
+            {
+                return (LoginViewModel)(BindingContext);
+            }
         }
 
         private async void LoginButtonClick(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new HomeTabbedPage());
+            ViewModel.CustomerLogin();
         }
         private void BackButton(object sender, EventArgs e)
         {

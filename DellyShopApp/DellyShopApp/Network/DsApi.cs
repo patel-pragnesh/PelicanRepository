@@ -126,5 +126,28 @@ namespace DellyShopApp.Network
 
         #endregion
 
+        #region Customer Login
+        public async Task<PRXResponseCustomerLogin> CustomerLogin(PRXRequestCustomerLogin request)
+        {
+            try
+            {
+                HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                var result = await _dsHttpClient.PostAsync<PRXResponseCustomerLogin>(Constants.DsApiEndPoints.LoginCustomerUrl, null, httpContent);
+                if (result.Success)
+                {
+                    return result.ResponseBody;
+                }
+                else
+                    throw result.Exception;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+        #endregion
+
     }
 }

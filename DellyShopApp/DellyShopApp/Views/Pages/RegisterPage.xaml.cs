@@ -13,7 +13,7 @@ namespace DellyShopApp.Views.Pages
             InitializeComponent ();
 			BindingContext = new RegisterViewModel(this.Navigation);
 
-		}
+        }
 
 		RegisterViewModel ViewModel
         {
