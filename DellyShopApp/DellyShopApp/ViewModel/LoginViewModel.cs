@@ -1,5 +1,6 @@
 ﻿using System;
 using Acr.UserDialogs;
+using DellyShopApp.Models;
 using DellyShopApp.Network;
 using DellyShopApp.Network.Proxy.Models;
 using DellyShopApp.Views.Pages;
@@ -60,8 +61,10 @@ namespace DellyShopApp.ViewModel
                     if (res != null && res.CustomerId != null)
                     {
                         UserDialogs.Instance.HideLoading();
+                        AuthenticatedUser.LoggedInUser = res;
                         await Navigation.PushAsync(new HomeTabbedPage());
                     }
+                    UserDialogs.Instance.HideLoading();
                 }
 
             }

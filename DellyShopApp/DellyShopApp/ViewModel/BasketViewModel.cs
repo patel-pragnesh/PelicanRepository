@@ -70,15 +70,16 @@ namespace DellyShopApp.ViewModel
                         });
                     }
                 }
-                order.BranchId = "";
-                order.CustomerId = "";
+                order.BranchId = "939fb8df-d9b9-42ff-a6b4-41f281059277";
+                order.CustomerId = AuthenticatedUser.LoggedInUser.CustomerId;
                 order.DeliveryAddress = "Galle";
                 order.Description = "Testing Visal";
                 order.Items = itemList;
-                order.PicCustomer = "";
-                order.PicInternal = "";
-                order.ReferenceNumberExternal = "";
-                order.ReferenceNumberInternal = "";
+                order.PicCustomer = "PC001";
+                order.PicInternal = "PC002";
+                order.Top = 10;
+                order.ReferenceNumberExternal = "RC00001";
+                order.ReferenceNumberInternal = "RN00001";
 
                 return order;
             }

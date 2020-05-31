@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DellyShopApp.Models;
+using DellyShopApp.Network.Proxy.Models;
 
 namespace DellyShopApp.DAL.DAO
 {
@@ -9,6 +10,6 @@ namespace DellyShopApp.DAL.DAO
     {
         Task<bool> AddBasketItem(BasketItem item);
         Task<List<BasketItem>> GetAllBasketItems();
-        Task<bool> CreateOrder(Order orders);
+        Task<PRXResponseCreateOrder> CreateOrder(Order orders);
     }
 }

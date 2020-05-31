@@ -80,33 +80,33 @@ namespace DellyShopApp.DAL.DAO
     
         }
 
-        public async Task<bool> CreateOrder(Order orders)
+        public async Task<PRXResponseCreateOrder> CreateOrder(Order orders)
         {
             //var config = new MapperConfiguration(cfg => cfg.CreateMap<PRXRequestOrder, Order>());
             //var mapper = new Mapper(config);
             //PRXRequestOrder request = mapper.Map<PRXRequestOrder>(orders);
-            PRXRequestOrder request = null;
+            PRXRequestCreateOrder request = null;
             try
             {
-                List<PRXItem> ps = new List<PRXItem>();
+                List<PRXCreateOrderItem> ps = new List<PRXCreateOrderItem>();
 
                 if (orders != null && orders.Items != null && orders.Items.Count > 0)
                 {
                     foreach(Item it in orders.Items)
                     {
-                        ps.Add(new PRXItem()
+                        ps.Add(new PRXCreateOrderItem()
                         {
                             DiscountAmount = it.DiscountAmount,
                             Price = it.Price,
                             ProductId = it.ProductId,
                             Qty = it.Qty,
-                            TotalAmount = it.TotalAmount
+                            TotalAmount = it.Price
                         });
                     }
-                    request = new PRXRequestOrder()
+                    request = new PRXRequestCreateOrder()
                     {
                         BranchId = orders.BranchId,
-                        CustomerId = orders.CustomerId,
+                        CustomerId = AuthenticatedUser.LoggedInUser.CustomerId,
                         DeliveryAddress = orders.DeliveryAddress,
                         Description = orders.Description,
                         Items = ps,
@@ -123,7 +123,7 @@ namespace DellyShopApp.DAL.DAO
                 {
                     return await DsApi.GetInstance().CreateOrderAsync(request);
                 }
-                return false;
+                return null;
 
             }
             catch(Exception e)

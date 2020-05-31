@@ -27,7 +27,7 @@ namespace DellyShopApp.ViewModel
                 {
                     if (order != null)
                     {
-                        await basketDAO.CreateOrder(order);
+                        var res = await basketDAO.CreateOrder(order);
                         UserDialogs.Instance.HideLoading();
                         await Navigation.PushAsync(new SuccessPage());
                     }

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace DellyShopApp.Network.Proxy.Models
 {
-    public class PRXRequestOrder
+    public class PRXRequestCreateOrder
     {
         [JsonProperty("top")]
         public int Top { get; set; }
@@ -34,16 +34,12 @@ namespace DellyShopApp.Network.Proxy.Models
         public string PicCustomer { get; set; }
 
         [JsonProperty("items")]
-        public List<PRXItem> Items { get; set; }
+        public IList<PRXCreateOrderItem> Items { get; set; }
+
 
     }
-    
 
-    public class PRXResponseOrder
-    {
-
-    }
-    public class PRXItem
+    public class PRXCreateOrderItem
     {
         [JsonProperty("productId")]
         public string ProductId { get; set; }
@@ -59,6 +55,28 @@ namespace DellyShopApp.Network.Proxy.Models
 
         [JsonProperty("totalAmount")]
         public double TotalAmount { get; set; }
+
+    }
+
+    public class PRXResponseCreateOrder
+    {
+        [JsonProperty("orderNumber")]
+        public string OrderNumber { get; set; }
+
+        [JsonProperty("deliveryDate")]
+        public DateTime DeliveryDate { get; set; }
+
+        [JsonProperty("picCustomer")]
+        public string PicCustomer { get; set; }
+
+        [JsonProperty("referenceNumberExternal")]
+        public string ReferenceNumberExternal { get; set; }
+
+        [JsonProperty("totalOrderAmount")]
+        public double TotalOrderAmount { get; set; }
+
+        [JsonProperty("TotalDiscountAmount")]
+        public double TotalDiscountAmount { get; set; }
     }
 
 }

@@ -85,18 +85,20 @@ namespace DellyShopApp.Network
             return domList;
         }
 
-        public async Task<bool>CreateOrderAsync(PRXRequestOrder request)
+        public async Task<PRXResponseCreateOrder> CreateOrderAsync(PRXRequestCreateOrder request)
         {
             try
             {
                 HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                var result = await _dsHttpClient.PostAsync<PRXRequestOrder>(Constants.DsApiEndPoints.CreateOrderUrl,null,httpContent);
-                return true;
+                var result = await _dsHttpClient.PostAsync<PRXResponseCreateOrder>(Constants.DsApiEndPoints.CreateOrderUrl,null,httpContent);
+                if (result.Success)
+                    return result.ResponseBody;
+                else
+                    throw result.Exception;
             }
             catch (Exception e)
             {
                 throw e;
-                return false;
             }
 
 
