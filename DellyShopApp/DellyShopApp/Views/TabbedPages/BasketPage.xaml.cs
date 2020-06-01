@@ -64,11 +64,18 @@ namespace DellyShopApp.Views.TabbedPages
         private void DeleteItemSwipe(object sender, SwipedEventArgs e)
         {
             if (!(sender is PancakeView pancake)) return;
-            if (pancake.BindingContext is ProductListModel item)
+            if (e.Parameter != null)
             {
-                item.VisibleItemDelete = true;
-                VisibleDelete(item.Id);
+                var prod = (Product)e.Parameter;
+                var basketItem = new BasketItem
+                {
+                    Id = prod.Id,
+                    ProductId = prod.ProductId
+                };
+                ViewModel.DeleteBasketItem(basketItem);
             }
+
+
         }
         /// <summary>
         /// Delete Visible Settings

@@ -29,7 +29,17 @@ namespace DellyShopApp.ViewModel
                     {
                         var res = await basketDAO.CreateOrder(order);
                         UserDialogs.Instance.HideLoading();
-                        await Navigation.PushAsync(new SuccessPage());
+                        if(res != null)
+                        {
+                            await basketDAO.ClearBasket();
+                            await UserDialogs.Instance.AlertAsync("Success Order");
+                            await Navigation.PushAsync(new SuccessPage());
+                        }
+                        else
+                        {
+                            await UserDialogs.Instance.AlertAsync("Something went wrong, please try again...");
+                        }
+
                     }
                 }
                 catch(Exception e)

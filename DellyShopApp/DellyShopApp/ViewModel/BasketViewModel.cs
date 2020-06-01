@@ -111,6 +111,29 @@ namespace DellyShopApp.ViewModel
             await LoadProductsData();
         }
 
+        public async void DeleteBasketItem(BasketItem item)
+        {
+            try
+            {
+                int res;
+                using (UserDialogs.Instance.Loading("Removing Item..."))
+                {
+                    res = await basketDAO.ClearBasketItem(item);
+                }
+                UserDialogs.Instance.HideLoading();
+                if (res != 0 && res != -1)
+                {
+                    UserDialogs.Instance.Alert("Item Succesfully removed");
+                }
+
+            }
+            catch(Exception e)
+            {
+                UserDialogs.Instance.HideLoading();
+            }
+            
+        }
+
         private async Task LoadProductsData()
         {
             using (UserDialogs.Instance.Loading("Loading Products..."))
@@ -148,6 +171,7 @@ namespace DellyShopApp.ViewModel
                                                 ProductImages = imgs,
                                                 MRP = product.mrp,
                                                 ProductId = product.productId,
+                                                Id = item.Id //Basket id is set temp to delete basket iten;
 
                                             });
                                         }

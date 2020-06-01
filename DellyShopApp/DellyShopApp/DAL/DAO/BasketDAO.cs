@@ -65,7 +65,8 @@ namespace DellyShopApp.DAL.DAO
                         domList.Add(new BasketItem()
                         {
                             ProductId = item.ProductId,
-                            Quantity = item.Quantity
+                            Quantity = item.Quantity,
+                            Id = item.Id
                         });
                     }
                     if (domList.Count > 0)
@@ -132,6 +133,37 @@ namespace DellyShopApp.DAL.DAO
             }
 
             
+        }
+
+        public async Task<bool> ClearBasket()
+        {
+            try
+            {
+                await synchronizer.ClearAllBasketItems();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<int> ClearBasketItem(BasketItem item)
+        {
+            try
+            {
+                var domItem = new ENTBasketItem
+                {
+                    Id = item.Id,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity
+                };
+                return await dBHandler.ClearBasketItem(domItem);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

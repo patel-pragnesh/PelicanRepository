@@ -91,6 +91,18 @@ namespace DellyShopApp.DAL
                 throw e;
             }
         }
+
+        public async Task<int> ClearBasketItem(ENTBasketItem item)
+        {
+            try
+            {
+                return await _connection.DeleteAsync<ENTBasketItem>(item);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         #endregion
     }
 }

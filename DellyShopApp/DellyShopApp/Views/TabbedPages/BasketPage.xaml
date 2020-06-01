@@ -39,7 +39,7 @@
                         <DataTemplate>
                             <pancakeView:PancakeView Margin="0,10,0,0" Style="{DynamicResource PancakeFrameStyle}">
                                 <pancakeView:PancakeView.GestureRecognizers>
-                                    <SwipeGestureRecognizer Direction="Left" Swiped="DeleteItemSwipe" />
+                                    <SwipeGestureRecognizer Direction="Left" Swiped="DeleteItemSwipe" CommandParameter="{Binding .}" />
                                     <SwipeGestureRecognizer Direction="Right" Swiped="UndeleteItem" />
                                     <TapGestureRecognizer Tapped="ClickItem" />
                                 </pancakeView:PancakeView.GestureRecognizers>
