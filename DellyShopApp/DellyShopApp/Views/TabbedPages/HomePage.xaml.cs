@@ -28,25 +28,23 @@ namespace DellyShopApp.Views.TabbedPages
             });
 
             InitializeComponent();
-            CategoryList.ItemsSource = CatoCategoriesList;
+            //CategoryList.ItemsSource = CatoCategoriesList;
             CarouselView.ItemsSource = Carousel;
             BestSellerList.ItemsSource = ProcutListModel;
             //PreviousViewedList.ItemsSource = ProcutListModel;
-            MostNews.FlowItemsSource = ProcutListModel;
+            //MostNews.FlowItemsSource = ProcutListModel;
         }
 
         private async void ProductDetailClick(object sender, EventArgs e)
         {
-            if (!(sender is PancakeView pancake)) return;
-            if (!(pancake.BindingContext is ProductListModel item)) return;
-            await Navigation.PushAsync(new ProductDetail(item));
+            var prod = (Product)(((TappedEventArgs)e).Parameter);
+            await Navigation.PushAsync(new ProductDetail(prod));
         }
 
-        private async void ClickCategory(object sender, EventArgs e)
+        void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)
         {
-            if (!(sender is StackLayout stack)) return;
-            if (!(stack.BindingContext is Category ca)) return;
-            await Navigation.PushAsync(new CategoryDetailPage(ca));
+            var prodType = (ProductType)(((TappedEventArgs)e).Parameter);
+            Navigation.PushAsync(new CategoryDetailPage(prodType));
         }
     }
 }

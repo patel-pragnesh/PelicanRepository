@@ -14,10 +14,12 @@ namespace DellyShopApp.Network.Proxy.Models
         public string description { get; set; }
         public string productCode { get; set; }
         public string productName { get; set; }
-        public int productType { get; set; }
+        public string productTypeId { get; set; }
+        public string productTypeName { get; set; }
         public string serialNumber { get; set; }
         public double mrp { get; set; }
         public double discountPercent { get; set; }
+        public double stock { get; set; }
         public int uom { get; set; }
         public DateTime createdAt { get; set; }
         public IList<PRXImages> productImages { get; set; }

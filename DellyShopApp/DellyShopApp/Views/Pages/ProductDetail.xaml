@@ -45,13 +45,13 @@
                 <Image
                     Aspect="AspectFit"
                     HeightRequest="50"
-                    Source="{Binding Product.Image}"
+                    Source="{Binding Product.DefaultImage}"
                     WidthRequest="50" />
                 <StackLayout VerticalOptions="CenterAndExpand">
                     <Label
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="15"
-                        Text="{Binding Product.Title}"
+                        Text="{Binding Product.ProductName}"
                         TextColor="{DynamicResource WhiteDarkFontColor}" />
                     <Label
                         FontFamily="{DynamicResource VerdanaProRegular}"
@@ -90,7 +90,7 @@
                             IndicatorsTintColor="{DynamicResource MainColor}"
                             InterPageSpacing="1"
                             IsSwipeEnabled="True"
-                            ItemsSource="{Binding ProductList}"
+                            ItemsSource="{Binding Product.ProductImages}"
                             Position="0"
                             ShowArrows="False"
                             ShowIndicators="True"
@@ -101,7 +101,7 @@
                                         <forms:CachedImage
                                             Margin="0"
                                             Aspect="AspectFit"
-                                            Source="{Binding .}" />
+                                            Source="{Binding ImagePath}" />
                                     </ContentView>
                                 </DataTemplate>
                             </abstractions:CarouselViewControl.ItemTemplate>
@@ -143,7 +143,7 @@
                             <Label
                                 FontFamily="{DynamicResource VerdanaProBold}"
                                 FontSize="22"
-                                Text="{Binding Title}"
+                                Text="{Binding Product.ProductName}"
                                 TextColor="{DynamicResource WhiteDarkFontColor}"
                                 VerticalOptions="Start"
                                 WidthRequest="150" />
@@ -152,7 +152,7 @@
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 FontSize="17"
                                 HorizontalOptions="Start"
-                                Text="{Binding Brand}"
+                                Text="{Binding Product.Brand}"
                                 TextColor="{DynamicResource DescLabelColor}"
                                 VerticalOptions="Start" />
                         </StackLayout>
@@ -160,7 +160,7 @@
                             FontFamily="{DynamicResource VerdanaProBold}"
                             FontSize="44"
                             HorizontalOptions="EndAndExpand"
-                            Text="{Binding Price, StringFormat='Rs:{0}'}"
+                            Text="{Binding Product.Price, StringFormat='Rs:{0}'}"
                             TextColor="{DynamicResource PriceLabelColor}"
                             VerticalOptions="StartAndExpand" />
 
@@ -173,8 +173,8 @@
                         TextColor="{DynamicResource WhiteDarkFontColor}">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{languages:Translate ProductDesc}" />
-                                <Span Text="{languages:Translate ReadMore}" TextColor="{DynamicResource DarkLabelTextColor}" />
+                                <Span Text="{Binding Product.Description}" />
+                                <!--<Span Text="{languages:Translate ReadMore}" TextColor="{DynamicResource DarkLabelTextColor}" />-->
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

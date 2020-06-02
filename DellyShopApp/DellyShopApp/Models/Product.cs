@@ -11,10 +11,12 @@ namespace DellyShopApp.Models
         public string Description { get; set; }
         public string ProductCode { get; set; }
         public string ProductName { get; set; }
-        public int ProductType { get; set; }
+        public string ProductTypeId { get; set; }
+        public string ProductTypeName { get; set; }
         public string SerialNumber { get; set; }
         public double MRP { get; set; }
         public double DiscountPercent { get; set; }
+        public double Stock { get; set; }
         public int UOM { get; set; }
         public DateTime CreatedAt { get; set; }
         public IList<ProductImages> ProductImages { get; set; }

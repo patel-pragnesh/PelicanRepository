@@ -1,16 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Input;
 using Acr.UserDialogs;
 using DellyShopApp.Models;
 using DellyShopApp.Network;
 using DellyShopApp.Network.Proxy.Models;
+using Xamarin.Forms;
 
 namespace DellyShopApp.ViewModel
 {
     public class HomeViewModel : BaseVm
     {
-        private ObservableCollection<ProductListModel> _products;
-        public ObservableCollection<ProductListModel> Products
+        private ObservableCollection<ProductType> _productTypes;
+        public ObservableCollection<ProductType> ProductTypes
+        {
+            get
+            {
+                return _productTypes;
+            }
+            set
+            {
+                SetProperty(ref _productTypes, value);
+                OnPropertyChanged(nameof(ProductTypes));
+            }
+        }
+        private ObservableCollection<Product> _products;
+        public ObservableCollection<Product> Products
         {
             get
             {
@@ -33,19 +50,39 @@ namespace DellyShopApp.ViewModel
             {
                 try
                 {
-                    var data = new ObservableCollection<ProductListModel>();
+                    var data = new ObservableCollection<Product>();
                     var result = await DsApi.GetInstance().RetrieveProductInfoAsync();
+                    LoadProductTypesData(result);
                     if (result != null && result.Count > 0)
                     {
-                        foreach (PRXResponseProduct product in result)
+                        foreach (PRXResponseProduct prod in result)
                         {
-                            data.Add(new ProductListModel()
+                            var images = new List<ProductImages>();
+                            if (prod.productImages != null && prod.productImages.Count > 0)
                             {
-                                Image = product.productImages.Count > 0 ? product.productImages[0].imagePath : "",
-                                Price = product.mrp,
-                                ProductId = product.productId,
-                                Title = product.productName,
-                                Brand =  "",
+                                foreach (var img in prod.productImages)
+                                {
+                                    images.Add(new ProductImages()
+                                    {
+                                        ImagePath = img.imagePath
+                                    });
+                                }
+                            }
+                            data.Add(new Product()
+                            {
+                                BarCode = prod.barcode,
+                                CreatedAt = prod.createdAt,
+                                Description = prod.description,
+                                DiscountPercent = prod.discountPercent,
+                                MRP = prod.mrp,
+                                UOM = prod.uom,
+                                ProductCode = prod.productCode,
+                                ProductId = prod.productId,
+                                SerialNumber = prod.serialNumber,
+                                ProductTypeName = prod.productTypeName,
+                                ProductTypeId = prod.productTypeId,
+                                ProductImages = images,
+                                ProductName = prod.productName
 
                             });
                         }
@@ -60,6 +97,60 @@ namespace DellyShopApp.ViewModel
                 }
             }
 
+        }
+
+        private void LoadProductTypesData(List<PRXResponseProduct> products)
+        {
+
+            var groupedList = products.GroupBy(s => s.productTypeId).ToList();
+            var list = new ObservableCollection<ProductType>();
+            var carsByPersonId = products.ToLookup(p => p.productTypeId);
+            foreach (var key in groupedList)
+            {
+                var items = new List<Product>();
+                string prodTypeName = "",productTypeId = "";
+                foreach(PRXResponseProduct prod in key)
+                {
+                    prodTypeName = prod.productTypeName;
+                    productTypeId = prod.productTypeId;
+                    var images = new List<ProductImages>();
+                    if(prod.productImages != null && prod.productImages.Count > 0)
+                    {
+                        foreach(var img in prod.productImages)
+                        {
+                            images.Add(new ProductImages()
+                            {
+                                ImagePath = img.imagePath
+                            });
+                        }
+                    }
+                    items.Add(new Product()
+                    {
+                        BarCode = prod.barcode,
+                        CreatedAt = prod.createdAt,
+                        Description = prod.description,
+                        DiscountPercent = prod.discountPercent,
+                        MRP = prod.mrp,
+                        UOM = prod.uom,
+                        ProductCode = prod.productCode,
+                        ProductId = prod.productId,
+                        SerialNumber = prod.serialNumber,
+                        ProductTypeName = prod.productTypeName,
+                        ProductTypeId = prod.productTypeId,
+                        ProductImages = images,
+                        ProductName = prod.productName
+                    });
+                }
+                list.Add(new ProductType()
+                {
+                    Products = items,
+                    ProductTypeId = productTypeId,
+                    ProductTypeName = prodTypeName,
+                    ProductTypeImage = "product_type.png"
+
+                });
+            }
+            ProductTypes = list;
         }
     }
 }

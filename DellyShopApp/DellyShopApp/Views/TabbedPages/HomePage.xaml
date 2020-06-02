@@ -67,6 +67,7 @@
                 <customControl:RepeaterView
                     x:Name="CategoryList"
                     Orientation="Horizontal"
+                    ItemsSource="{Binding ProductTypes}"
                     Spacing="10">
                     <customControl:RepeaterView.ItemTemplate>
                         <DataTemplate>
@@ -76,7 +77,7 @@
                                     HorizontalOptions="Start"
                                     WidthRequest="150">
                                     <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="ClickCategory" />
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" CommandParameter="{Binding .}" />
                                     </StackLayout.GestureRecognizers>
                                     <Grid BackgroundColor="Transparent">
                                         <Grid.RowDefinitions>
@@ -91,9 +92,9 @@
                                             sharedTransitions:Transition.Group="{Binding Id}"
                                             sharedTransitions:Transition.Name="Category"
                                             Aspect="AspectFill"
-                                            Source="{Binding Image}">
+                                            Source="{Binding ProductTypeImage}">
                                             <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="ClickCategory" />
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" CommandParameter="{Binding .}" />
                                             </Image.GestureRecognizers>
                                         </Image>
                                         <pancakeView:PancakeView
@@ -110,7 +111,7 @@
                                             FontFamily="{DynamicResource VerdanaProBold}"
                                             FontSize="18"
                                             HorizontalOptions="CenterAndExpand"
-                                            Text="{Binding CategoryName}"
+                                            Text="{Binding ProductTypeName}"
                                             TextColor="{DynamicResource LabelTextColor}"
                                             VerticalOptions="CenterAndExpand" />
                                     </Grid>
@@ -185,7 +186,7 @@
                                     WidthRequest="{x:OnIdiom Tablet=150,
                                                              Phone=130}">
                                     <pancakeView:PancakeView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="ProductDetailClick" />
+                                        <TapGestureRecognizer Tapped="ProductDetailClick" CommandParameter="{Binding .}"/>
                                     </pancakeView:PancakeView.GestureRecognizers>
                                     <StackLayout>
                                         <forms:CachedImage
@@ -253,16 +254,16 @@
                                     WidthRequest="{x:OnIdiom Tablet=150,
                                                              Phone=130}">
                                     <pancakeView:PancakeView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="ProductDetailClick" />
+                                        <TapGestureRecognizer Tapped="ProductDetailClick" CommandParameter="{Binding .}" />
                                     </pancakeView:PancakeView.GestureRecognizers>
                                     <StackLayout>
                                         <forms:CachedImage
                                             Aspect="AspectFill"
                                             HeightRequest="150"
-                                            Source="{Binding Image}" />
+                                            Source="{Binding DefaultImage}" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
-                                            Text="{Binding Title}"
+                                            Text="{Binding ProductName}"
                                             TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="Start" />
                                         <Label
@@ -300,6 +301,7 @@
             <controls:FlowListView
                 x:Name="MostNews"
                 BackgroundColor="Transparent"
+                FlowItemsSource="{Binding Products}"
                 FlowColumnCount="2"
                 FlowColumnExpand="None"
                 HasUnevenRows="False"
@@ -323,15 +325,15 @@
                                                      Phone=130}">
                             <StackLayout>
                                 <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="ClickCategory" />
+                                    <TapGestureRecognizer Tapped="ProductDetailClick" CommandParameter="{Binding .}" />
                                 </StackLayout.GestureRecognizers>
                                 <forms:CachedImage
                                     Aspect="AspectFit"
                                     HeightRequest="150"
-                                    Source="{Binding Image}" />
+                                    Source="{Binding DefaultImage}" />
                                 <Label
                                     FontFamily="{DynamicResource VerdanaProRegular}"
-                                    Text="{Binding Title}"
+                                    Text="{Binding ProductName}"
                                     TextColor="{DynamicResource WhiteDarkFontColor}"
                                     VerticalOptions="Start" />
                                 <Label

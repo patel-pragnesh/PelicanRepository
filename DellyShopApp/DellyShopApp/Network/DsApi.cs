@@ -64,21 +64,26 @@ namespace DellyShopApp.Network
             {
                 foreach (PRXResponseProduct resp in result.ResponseBody)
                 {
-                    domList.Add(new PRXResponseProduct()
+                    if (resp.stock > 0)
                     {
-                        description = resp.description,
-                        discountPercent = resp.discountPercent,
-                        serialNumber = resp.serialNumber,
-                        createdAt = resp.createdAt,
-                        barcode = resp.barcode,
-                        mrp = resp.mrp,
-                        productCode = resp.productCode,
-                        productId = resp.productId,
-                        productImages = resp.productImages,
-                        productName = resp.productName,
-                        productType = resp.productType,
-                        uom = resp.uom
-                    });
+                        domList.Add(new PRXResponseProduct()
+                        {
+                            description = resp.description,
+                            discountPercent = resp.discountPercent,
+                            serialNumber = resp.serialNumber,
+                            createdAt = resp.createdAt,
+                            barcode = resp.barcode,
+                            mrp = resp.mrp,
+                            productCode = resp.productCode,
+                            stock = resp.stock,
+                            productId = resp.productId,
+                            productImages = resp.productImages,
+                            productName = resp.productName,
+                            productTypeId = resp.productTypeId,
+                            productTypeName = resp.productTypeName,
+                            uom = resp.uom
+                        });
+                    }
                 }
             }
 

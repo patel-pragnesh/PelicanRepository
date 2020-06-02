@@ -115,6 +115,7 @@
     <Compile Include="Rednerers\PancakeViewRenderer.cs" />
     <Compile Include="Rednerers\ShapeUtils.cs" />
     <Compile Include="Persistance\SQLLiteDb.cs" />
+    <BundleResource Include="Resources\product_type.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

@@ -105,7 +105,7 @@ namespace DellyShopApp.Views.TabbedPages
         {
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
-            await Navigation.PushAsync(new ProductDetail(item));
+            //await Navigation.PushAsync(new ProductDetail(item));
         }
     }
 }

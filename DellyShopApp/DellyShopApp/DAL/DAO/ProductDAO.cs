@@ -59,11 +59,13 @@ namespace DellyShopApp.DAL.DAO
                             DiscountPercent = p.DiscountPercent,
                             Id = p.Id,
                             MRP = p.MRP,
+                            Stock = p.Stock,
                             ProductCode = p.ProductCode,
                             ProductId = p.ProductId,
                             ProductImages = domImageList,
                             ProductName = p.ProductName,
-                            ProductType = p.ProductType
+                            ProductTypeId = p.ProductTypeId,
+                            ProductTypeName = p.ProductTypeName
                         });
                     }
 

@@ -29,7 +29,7 @@
                         FontSize="30"
                         HorizontalOptions="Start"
                         Style="{DynamicResource LabelStyle}"
-                        Text="{languages:Translate Shop}"
+                        Text="{Binding ProductType.ProductTypeName}"
                         TextColor="{DynamicResource DarkLabelTextColor}" />
                     <Label
                         Margin="0"
@@ -70,7 +70,7 @@
                         Grid.Column="0"
                         sharedTransitions:Transition.Name="DogImage"
                         Aspect="AspectFill"
-                        Source="{Binding Image}" />
+                        Source="{Binding ProductType.ProductTypeImage}" />
                     <pancakeView:PancakeView
                         Grid.Row="0"
                         Grid.Column="0"
@@ -162,6 +162,7 @@
                 <customControl:RepeaterView
                     x:Name="BestSellerList"
                     Orientation="Horizontal"
+                    ItemsSource="{Binding Products}"
                     Spacing="10">
                     <customControl:RepeaterView.ItemTemplate>
                         <DataTemplate>
@@ -179,13 +180,13 @@
                                     WidthRequest="{x:OnIdiom Tablet=150,
                                                              Phone=130}">
                                     <pancakeView:PancakeView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="ProductDetailClick" />
+                                        <TapGestureRecognizer Tapped="ProductDetailClick" CommandParameter="{Binding .}"/>
                                     </pancakeView:PancakeView.GestureRecognizers>
                                     <StackLayout>
                                         <forms:CachedImage
                                             Aspect="AspectFill"
                                             HeightRequest="150"
-                                            Source="{Binding Image}" />
+                                            Source="{Binding DefaultImage}" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             Text="{Binding Title}"
@@ -226,6 +227,7 @@
             <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
                 <customControl:RepeaterView
                     x:Name="PreviousViewedList"
+                    ItemsSource="{Binding Products}"
                     Orientation="Horizontal"
                     Spacing="10">
                     <customControl:RepeaterView.ItemTemplate>
@@ -244,13 +246,13 @@
                                     WidthRequest="{x:OnIdiom Tablet=150,
                                                              Phone=130}">
                                     <pancakeView:PancakeView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="ProductDetailClick" />
+                                        <TapGestureRecognizer Tapped="ProductDetailClick" CommandParameter="{Binding .}" />
                                     </pancakeView:PancakeView.GestureRecognizers>
                                     <StackLayout>
                                         <forms:CachedImage
                                             Aspect="AspectFill"
                                             HeightRequest="150"
-                                            Source="{Binding Image}" />
+                                            Source="{Binding DefaultImage}" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             Text="{Binding Title}"
@@ -292,6 +294,7 @@
             <controls:FlowListView
                 x:Name="MostNews"
                 BackgroundColor="{DynamicResource BackgroundColor}"
+                FlowItemsSource="{Binding Products}"
                 FlowColumnCount="2"
                 FlowColumnExpand="None"
                 HasUnevenRows="False"
@@ -320,7 +323,7 @@
                                 <forms:CachedImage
                                     Aspect="AspectFit"
                                     HeightRequest="150"
-                                    Source="{Binding Image}" />
+                                    Source="{Binding DefaultImage}" />
                                 <Label
                                     FontFamily="{DynamicResource VerdanaProRegular}"
                                     Text="{Binding Title}"

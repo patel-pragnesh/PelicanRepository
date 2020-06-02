@@ -17,8 +17,8 @@ namespace DellyShopApp.Views.Pages
         int productCount;
         private readonly List<StartList> _startList = new List<StartList>();
         private readonly List<CommentModel> _comments = new List<CommentModel>();
-        private readonly ProductListModel _products;
-        public ProductDetail(ProductListModel product)
+        private readonly Product _products;
+        public ProductDetail(Product product)
         {
             _products = product;
 
@@ -102,7 +102,7 @@ namespace DellyShopApp.Views.Pages
 
         private async void CommentsPageClick(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CommentsPage(_products));
+            //await Navigation.PushAsync(new CommentsPage(_products));
         }
 
         async void AddBasketButton(object sender, EventArgs e)

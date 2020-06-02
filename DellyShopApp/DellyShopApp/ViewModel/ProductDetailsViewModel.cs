@@ -9,8 +9,8 @@ namespace DellyShopApp.ViewModel
     public class ProductDetailsViewModel : BaseVm
     {
         IBasketDAO basketDAO;
-        private ProductListModel _product;
-        public ProductListModel Product
+        private Product _product;
+        public Product Product
         {
             get { return _product; }
             set
@@ -20,7 +20,7 @@ namespace DellyShopApp.ViewModel
             }
         }
 
-        public ProductDetailsViewModel(ProductListModel product,INavigation navigation)
+        public ProductDetailsViewModel(Product product,INavigation navigation)
         {
             basketDAO = new BasketDAO();
             Product = product;
@@ -40,6 +40,7 @@ namespace DellyShopApp.ViewModel
                     await basketDAO.AddBasketItem(item);
                 }
                 UserDialogs.Instance.HideLoading();
+                await UserDialogs.Instance.AlertAsync("Items Added to Basket Successfully");
         
             }
             catch(Exception)
