@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using DellyShopApp.Managers;
+using DellyShopApp.Models;
 using DellyShopApp.Network.Proxy.Models;
 using Newtonsoft.Json;
 
@@ -153,6 +154,56 @@ namespace DellyShopApp.Network
                 throw e;
             }
 
+        }
+        #endregion
+
+        #region Orders By Customer
+        public async Task<List<OrdersByCustomer>> GetOrdersByCustomer(string customerId)
+        {
+            List<OrdersByCustomer> domList = new List<OrdersByCustomer>();
+            var result = await _dsHttpClient.GetAsync<List<PRXOrdersByCustomerResponse>>(Constants.DsApiEndPoints.OrdersByCustomerUrl + "/" + customerId );
+
+            if (result != null && result.ResponseBody != null && result.ResponseBody.Count > 0)
+            {
+                foreach (PRXOrdersByCustomerResponse resp in result.ResponseBody)
+                {
+                    var domitems = new List<OrderByCustomerItem>();
+                    if(resp.Items != null && resp.Items.Count >0)
+                    {
+                        foreach(PRXOrderByCustomerItem item in resp.Items)
+                        {
+                            domitems.Add(new OrderByCustomerItem()
+                            {
+                                DiscountAmount = item.DiscountAmount,
+                                Price = item.Price,
+                                ProductId = item.ProductId,
+                                ProductName = item.ProductName,
+                                Qty = item.Qty,
+                                TotalAmount = item.TotalAmount
+                            });
+                        }
+                    }
+                    domList.Add(new OrdersByCustomer()
+                    {
+                        SalesOrderId = resp.SalesOrderId,
+                        PicCustomer = resp.PicCustomer,
+                        Branch = resp.Branch,
+                        DeliveryAddress = resp.DeliveryAddress,
+                        DeliveryDate = resp.DeliveryDate,
+                        OrderedDate = resp.OrderedDate,
+                        OrderNumber = resp.OrderNumber,
+                        OrderStatus = resp.OrderStatus,
+                        ReferenceNumberExternal = resp.ReferenceNumberExternal,
+                        TotalDiscountAmount = resp.TotalDiscountAmount,
+                        TotalOrderAmount = resp.TotalOrderAmount,
+                        Items = domitems
+
+                    });
+                }
+ 
+            }
+
+            return domList;
         }
         #endregion
 

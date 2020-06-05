@@ -30,7 +30,7 @@ namespace DellyShopApp.Views.TabbedPages
             InitializeComponent();
             //CategoryList.ItemsSource = CatoCategoriesList;
             CarouselView.ItemsSource = Carousel;
-            BestSellerList.ItemsSource = ProcutListModel;
+            //BestSellerList.ItemsSource = ProcutListModel;
             //PreviousViewedList.ItemsSource = ProcutListModel;
             //MostNews.FlowItemsSource = ProcutListModel;
         }

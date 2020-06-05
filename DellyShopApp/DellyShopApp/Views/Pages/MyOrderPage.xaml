@@ -16,20 +16,20 @@
     <ScrollView>
         <StackLayout Margin="10">
             <StackLayout>
-                <partialViews:NavigationBarPartialView>
+                <!--<partialViews:NavigationBarPartialView>
                     <x:Arguments>
                         <x:String>MyOrders</x:String>
                         <x:Boolean>True</x:Boolean>
                         <x:Boolean>False</x:Boolean>
                         <x:Boolean>False</x:Boolean>
                     </x:Arguments>
-                </partialViews:NavigationBarPartialView>
+                </partialViews:NavigationBarPartialView>-->
             </StackLayout>
             <customControl:RepeaterView
                 x:Name="BasketItems"
                 Margin="0,0,0,10"
                 Padding="2"
-                ItemsSource="{Binding ProcutListModel}">
+                ItemsSource="{Binding OrderItems}">
                 <customControl:RepeaterView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
@@ -61,13 +61,13 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="15"
                                                 LineBreakMode="TailTruncation"
-                                                Text="{Binding Title}"
+                                                Text="{Binding ProductName}"
                                                 TextColor="{DynamicResource WhiteDarkFontColor}"
                                                 WidthRequest="180" />
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="12"
-                                                Text="{Binding Brand}"
+                                                Text="{Binding Branch}"
                                                 TextColor="{DynamicResource DescLabelColor}" />
                                         </StackLayout>
                                         <Label
@@ -129,7 +129,7 @@
                                             FontFamily="{DynamicResource VerdanaProLight}"
                                             FontSize="15"
                                             HorizontalOptions="EndAndExpand"
-                                            Text="516516548"
+                                            Text="{Binding OrderNumber}"
                                             TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="CenterAndExpand" />
                                     </StackLayout>
@@ -145,7 +145,7 @@
                                             FontFamily="{DynamicResource VerdanaProLight}"
                                             FontSize="15"
                                             HorizontalOptions="EndAndExpand"
-                                            Text="12/05/2019"
+                                            Text="{Binding OrderedDate}"
                                             TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="CenterAndExpand" />
                                     </StackLayout>

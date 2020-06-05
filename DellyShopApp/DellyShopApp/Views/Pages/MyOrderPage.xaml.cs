@@ -1,5 +1,6 @@
 ﻿using System;
 using DellyShopApp.Models;
+using DellyShopApp.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +14,8 @@ namespace DellyShopApp.Views.Pages
         public MyOrderPage()
         {
             InitializeComponent();
-            BasketItems.ItemsSource = ProcutListModel;
+            //BasketItems.ItemsSource = ProcutListModel;
+            BindingContext = new MyOrderViewModel(Navigation);
         }
 
         private void OpenDetailClick(object sender, EventArgs e)

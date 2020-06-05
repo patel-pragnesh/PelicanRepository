@@ -16,6 +16,7 @@ namespace DellyShopApp.Managers
             public const string ProductsUrl = "api/products";
             public const string RegisterCustomerUrl = "api/customer/registration";
             public const string LoginCustomerUrl = "api/customer/login";
+            public const string OrdersByCustomerUrl = "api/orders";
         }
 
 

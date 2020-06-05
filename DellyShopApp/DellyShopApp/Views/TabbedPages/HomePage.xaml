@@ -167,6 +167,7 @@
                 <customControl:RepeaterView
                     x:Name="BestSellerList"
                     Orientation="Horizontal"
+                    ItemsSource="{Binding Products}"
                     Spacing="10">
                     <customControl:RepeaterView.ItemTemplate>
                         <DataTemplate>
@@ -190,7 +191,7 @@
                                         <forms:CachedImage
                                             Aspect="AspectFill"
                                             HeightRequest="150"
-                                            Source="{Binding Image}" />
+                                            Source="{Binding DefaultImage}" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             Text="{Binding Title}"
